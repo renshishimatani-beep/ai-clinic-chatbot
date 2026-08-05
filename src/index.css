@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #3ba9d4;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f4f9fc;
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Segoe UI", system-ui,
+    -apple-system, sans-serif;
+  color: #1f2a37;
+}
+
+/* Character animations */
+@keyframes charFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes charFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes charSide {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+@keyframes charBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.char-fade-in {
+  animation: charFadeIn 0.5s ease-out;
+}
+.char-float {
+  animation: charFloat 3s ease-in-out infinite;
+}
+.char-side {
+  animation: charSide 1.2s ease-in-out infinite;
+}
+.char-bounce {
+  animation: charBounce 0.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char-fade-in,
+  .char-float,
+  .char-side,
+  .char-bounce,
+  .launcher-float {
+    animation: none;
+  }
+}
+
+/* Launcher floating animation */
+@keyframes launcherFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.launcher-float {
+  animation: launcherFloat 3s ease-in-out infinite;
+}
+
+.tsunamaru-chat-target {
+  top: var(--chat-boundary-top, 0px);
+  left: var(--chat-boundary-left, 0px);
+  width: var(--chat-boundary-width, 100vw);
+  height: var(--chat-boundary-height, 100dvh);
+  border-radius: 0;
+}
+
+.tsunamaru-chat-overlay {
+  background: rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(3px);
+}
+
+.tsunamaru-chat-scroll-area {
+  position: relative;
+  min-height: 0;
+  flex-grow: 1;
+  overflow-y: scroll;
+  overflow-anchor: none;
+  padding: 80px 16px 72px;
+}
+
+@media (min-width: 768px) {
+  .tsunamaru-chat-target:not(.tsunamaru-chat-target--force-mobile) {
+    width: min(440px, calc(var(--chat-boundary-width, 100vw) - 48px));
+    height: min(720px, calc(var(--chat-boundary-height, 100dvh) - 48px));
+    top: calc(
+      var(--chat-boundary-top, 0px) + var(--chat-boundary-height, 100dvh) -
+        min(720px, calc(var(--chat-boundary-height, 100dvh) - 48px)) - 24px
+    );
+    left: calc(
+      var(--chat-boundary-left, 0px) + var(--chat-boundary-width, 100vw) -
+        min(440px, calc(var(--chat-boundary-width, 100vw) - 48px)) - 24px
+    );
+    border-radius: 24px;
+  }
+
+  .tsunamaru-chat-overlay:not(.tsunamaru-chat-overlay--force-mobile) {
+    background: rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(1px);
+  }
+}
+
+/* Accessible focus ring */
+.focus-ring:focus-visible {
+  outline: 3px solid var(--main-color);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Scrollbar polish */
+.chat-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: #cfe6f2;
+  border-radius: 6px;
+}
+
+/* ── Print styles for monthly report ── */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  /* Show only the report canvas */
+  .report-page {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    padding: 16px !important;
+  }
+
+  /* Avoid splitting cards/sections across pages */
+  .report-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep chart containers together */
+  .recharts-wrapper {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

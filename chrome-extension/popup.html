@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>つなまるAI 商談デモ</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header><img src="assets/tsunamaru-transparent.png" alt="" /><div><h1>つなまるAI 商談デモ</h1><p>実サイト上でのローカル確認</p></div></header>
+      <label for="config">商談デモ設定JSON</label>
+      <textarea id="config" rows="10" spellcheck="false" placeholder="管理画面でコピーしたJSONを貼り付けてください"></textarea>
+      <button id="load" class="secondary" type="button">設定を読み込む</button>
+      <p id="loaded" class="loaded" hidden></p>
+      <div class="actions">
+        <button id="show" class="primary" type="button">このページにつなまるAIを表示</button>
+        <button id="hide" type="button">つなまるAIを非表示</button>
+        <button id="delete" class="danger" type="button">登録設定を削除</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <p class="notice">表示は現在のタブ内だけに適用され、ページを再読み込みすると消えます。ホームページの内容・Cookie・入力情報は取得しません。</p>
+    </main>
+    <script type="module" src="dist/popup.js"></script>
+  </body>
+</html>

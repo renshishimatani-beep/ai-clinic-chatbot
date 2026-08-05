@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "つなまるAI 商談デモ",
+  "version": "1.0.0",
+  "description": "商談担当者のChrome内だけで、現在のページにつなまるAIを表示します。",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "action": {
+    "default_title": "つなまるAI 商談デモ",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "assets/tsunamaru-transparent.png",
+    "32": "assets/tsunamaru-transparent.png",
+    "48": "assets/tsunamaru-transparent.png",
+    "128": "assets/tsunamaru-transparent.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/tsunamaru-transparent.png"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
